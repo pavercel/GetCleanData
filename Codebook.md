@@ -7,12 +7,12 @@ This codebook describes the variables, the dataset, and the experimental design 
 ##Dataset
 The dataset used in this study contains accelerometer and gyroscope data collected from the Samsung Galaxy S smartphones from 30 volunteers, which was recorded as each subject performed six daily activities (i.e., walking, walking upstairs, walking downstairs, sitting, standing and laying). The dataset contains a total of 10,299 observations for 561 variables.
 
-*A complete description of the dataset can be found at: (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)†
+*A complete description of the dataset can be found at: (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)¬†
 
-*The data for the project was downloaded from:†
-(https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)†
+*The data for the project was downloaded from:¬†
+(https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)¬†
 
-*An overview of the relationship between the dataset Samsung files, along with helpful processing tips was provided by David Hood, Coursera: Getting and Cleaning Data Course, discussion thread: (https://class.coursera.org/getdata-007/forum/thread?thread_id=49)
+*An overview of the relationship between the Samsung dataset files along with helpful processing tips was provided by David Hood, Coursera: Getting and Cleaning Data Course, discussion thread: (https://class.coursera.org/getdata-007/forum/thread?thread_id=49)
 
 
 ##Overview of Processing Steps
@@ -27,28 +27,34 @@ The dataset used in this study contains accelerometer and gyroscope data collect
 
 ##Data Transformation Approaches and Data Processing Notes
 
-1.	For the training and test data, information from 4 associated files will ultimately need to be assembled to create the second tidy dataset. For example, the following training-related files were needed to assemble and process the training data (the corresponding ëtestí files will be needed for the test data):
+1.	The following training-related files were needed to assemble and process the training data (Note: the corresponding ‚Äòtest‚Äô-related files were needed to process the test data):
 
     a)  (X_train.txt) contains the measurement data for the training set
+    
     b)  (subject_train.txt) contains the subject identifiers
+    
     c)  ('Y_train.txt) contains the activity codes
+    
     d)  (features.txt) contains the labels corresponding to the activity code.
 
-2.	Load training dataset and associated files; load test dataset and associated files
-3.	Merge the training and the test datasets using rbind(). That is, the measurement data from the test and training files will be merged; the subject data from the test and training files will be merged; and the activity codes from the test and training data will be merged.
-4.    The variable names for each column in the merged measurement dataframe are located in the 'features.txt' file. Need to read this file in and set the colnames using the variable names in this file.
-5.	Next, extract only those measurements containing the mean() and std dev() for each measurement using grep() then cbind () the data.
+2.	First, load the training dataset and associated files(noted above); load test dataset and associated test files.
+3.	Merge the training and the test datasets using rbind() as follows: merge the measurement data from the test and training files; merge the subject data from the test and training files; and merge the activity data from the test and training data files.
+4.    The variable names for each column in the merged measurement dataframe are located in the (features.txt) file. Read this file in and set the colnames to the variable names in this file.
+5.	Next, extract only those measurements containing the mean() and std dev() for each measurement using grep(), then cbind () the data.
 6. Clean up the variable names according to the tidy data heuristics by removing parentheses & hyphens from col names, and using lowercase letters when possible. (Note: the capitalization was left in the measurement variable names because changing to all lower case would reduce readability).
 
 ###The following transformations in the variable names were made:
 
 *the parentheses and hyphens were removed from the measurement variable names.
-*descriptive labels were assigned to activities by replacing the activity code with the name (e.g., 1 = ìwalkingî)
+
+*descriptive labels were assigned to activities by replacing the activity code with the name (e.g., 1 = ‚Äúwalking‚Äù)
+
 *a descriptive col header was created for activity 
+
 *a descriptive col header was created for subjects
 
 7.	Combine the 3 dataframes that contain the measurement data, subject data and activity data into a single dataframe using cbind().
-8.	To create the second tidy dataset, first specify which measurement variables are needed to calculate the mean of each variable (i.e., donít need the first two columns which contain the subject and activity label).
+8.	To create the second tidy dataset, first specify which measurement variables are needed to calculate the mean of each variable (i.e., don‚Äôt need the first two columns which contain the subject and activity label).
 9.	Use lapply to calculate the mean of the measurement variables and aggregate the results by subject, then activity.
 10.	Order the rows by subject ID.
 11.	Write the tidy_data dataset to an output file using write.table()
