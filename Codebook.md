@@ -51,7 +51,10 @@ The dataset used in this study contains accelerometer and gyroscope data collect
 
 ###The following transformations in the variable names were made:
 
-  *the parentheses and hyphens were removed from the measurement variable names.
-  *descriptive labels were assigned to activities by replacing the activity code with the name (e.g., 1 = “walking”)
-  *a descriptive col header was created for activity 
-  *a descriptive col header was created for subjects
+-the parentheses and hyphens were removed from the measurement variable names.
+  
+-descriptive labels were assigned to activities by replacing the activity code with the name (e.g., 1 = “walking”)
+  
+-a descriptive col header was created for activity
+  
+-a descriptive col header was created for subjects
